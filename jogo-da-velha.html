@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da velha</title>
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="jogo" width="600" height="600" onclick="jogada(event)">
+            Navegador não possui suporte ao canvas.
+        </canvas>
+    </div>
+    <div class="opcoes">
+        <label for="inicio">Começar com:</label>
+        <select name="inicio" id="inicio" onchange="setJogadaInicial()">
+            <option value="x" selected>X</option>
+            <option value="o">O</option>
+        </select>
+    </div>
+</body>
+
+</html>

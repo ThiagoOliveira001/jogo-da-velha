@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.container #jogo {
+    border: solid 5px black;
+}
+
+.opcoes {
+    display: flex;
+    justify-content: center;
+}
+
+.opcoes select {
+    width: 50px;
+}
