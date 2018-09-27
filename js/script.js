@@ -351,5 +351,11 @@ function limpar() {
     temVencedor = false;
     last = null;
     cont = 0;
+    $('inicio').value = 0;
     criaJogo();
+}
+
+function zeraPontuacao() {
+    $('pt-x').innerHTML = 0;
+    $('pt-bl').innerHTML = 0;
 }
