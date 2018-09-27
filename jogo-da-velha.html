@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <title>Jogo da velha</title>
     <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -14,13 +17,35 @@
             Navegador não possui suporte ao canvas.
         </canvas>
     </div>
-    <div class="opcoes">
+    <div class="opcoes form-group">
         <label for="inicio">Começar com:</label>
-        <select name="inicio" id="inicio" onchange="setJogadaInicial()">
+        <select name="inicio" class="form-control" id="inicio" onchange="setJogadaInicial()">
             <option value="1">X</option>
             <option value="0" selected>O</option>
         </select>
+        <button type="button" class="btn btn-danger">
+            <i class="material-icons" onclick="limpar()">
+                clear
+            </i>
+        </button>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="alterPlayerMode('true')">1P</button>
+        <button type="button" class="btn btn-primary" onclick="alterPlayerMode('false')">2P</button>
     </div>
+    <aside class="painel-pontos">
+        <div class="jogador-nome">
+            <p>Jogador X</p>
+        </div>
+        <div class="jogador-nome">
+            <p>Jogador O</p>
+        </div>
+        <div class="pts">
+            <p id="pt-x" style="text-align: center;">0</p>
+        </div>
+        <div class="pts">
+            <p id="pt-bl" style="text-align: center;">0</p>
+        </div>
+    </aside>
 </body>
 
 </html>

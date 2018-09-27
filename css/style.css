@@ -4,14 +4,52 @@
 }
 
 .container #jogo {
-    border: solid 5px black;
+    border: solid 1px gray;
+    box-shadow: 10px 10px 5px gray;
+    margin-top: 10px;
+    margin-left: 100px;  
 }
 
 .opcoes {
+    position: absolute;
+    top: 0;
+    float: left;
     display: flex;
     justify-content: center;
+    border: solid 1px gray;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    box-shadow: 10px 10px 5px gray;
 }
 
 .opcoes select {
+    width: 100px;
+}
+
+.opcoes button {
     width: 50px;
+    height: 37px;
+    margin-left: 10px;
+}
+
+.painel-pontos {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-column-gap: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid 1px gray;
+    box-shadow: 10px 10px 5px gray;
+    margin-right: 20px;
+    margin-top: 30px; 
+    padding: 20px;
+}
+
+.painel-pontos .pts{
+    border: solid 2px black;
+    font-size: 2.5em;
+    color: white;
+    background-color: rgb(49, 47, 47);
 }
