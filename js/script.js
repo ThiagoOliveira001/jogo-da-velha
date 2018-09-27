@@ -1,7 +1,6 @@
 var canvas;
 var context;
 var $ = document.getElementById.bind(document);
-var jodagaInicial = 'x';
 var cont = 0;
 var velha = [
     [null, null, null],
@@ -41,50 +40,94 @@ function mousePos(event) {
 }
 
 function jogada(event) {
-    cont++;
     var cords = mousePos(event);
     if (cords.x < 200) {
         if (cords.y < 200) {
-            console.log('x ok');
-            desenhaX(50, 50);
+            if (velha[0][0] != null) {
+                return;
+            }    
+            if ((cont % 2) == 1) {
+                velha[0][0] = 1;
+                desenhaX(50, 50);
+            } else {
+                velha[0][0] = 0;
+                desenhaBola(50, 50);
+            }
         } else if (cords.y < 400) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(50, 250);
+            } else {
+                desenhaBola(50, 250);
+            }
         } else if (cords.y < 600) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(50, 450);
+            } else {
+                desenhaBola(50, 450);
+            }   
         }
     } 
     else if (cords.x < 400) {
         if (cords.y < 200) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(250, 50);
+            } else {
+                desenhaBola(250, 50);
+            }
         } else if (cords.y < 400) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(250, 250);
+            } else {
+                desenhaBola(250, 250);
+            }
         } else if (cords.y < 600) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(250, 450);
+            } else {
+                desenhaBola(250, 450);
+            }
         }
     }
     else if (cords.x < 600) {
         if (cords.y < 200) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(450, 50);
+            } else {
+                desenhaBola(450, 50);
+            }
         } else if (cords.y < 400) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(450, 250);
+            } else {
+                desenhaBola(450, 250);
+            }
         } else if (cords.y < 600) {
-
+            if ((cont % 2) == 1) {
+                desenhaX(450, 450);
+            } else {
+                desenhaBola(450, 450);
+            }
         }
     }
-
+    cont++;
     console.log(cords,cont);
 }
 
 function setJogadaInicial() {
     if (cont == 0) {
-        jodagaInicial = $('inicio').value;
+        cont = $('inicio').value == 1 ? 1 : 0;
     } else {
         alert('Jogo já foi iniciado!');
     }
 }
 
 function desenhaBola(x,y) {
-    
+    context.beginPath();
+    context.arc(x + 50, y + 50, 50, 0, 2*Math.PI);
+    context.lineWidth = 2;
+    context.strokeStyle = 'red';
+
+    context.stroke();
 }
 
 function desenhaX(x,y) {
