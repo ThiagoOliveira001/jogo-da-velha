@@ -14,7 +14,8 @@ var mapaTabuleiro = [
     [{ x: 250, y: 150 }, { x: 250, y: 350 }, { x: 250, y: 550 }],
     [{ x: 450, y: 150 }, { x: 450, y: 350 }, { x: 450, y: 550 }]
 ];
-
+var jogador = 0;
+var ia = 1;
 var temVencedor = false;
 
 window.onload = () => {
@@ -191,11 +192,11 @@ function computador() {
         pc = {
             x: Math.random() * (600 - 1) + 1,
             y: Math.random() * (600 - 1) + 1
-        } ;
+        };
         if (jogada(null, pc) == undefined) {
             break;
         }
-    } while(temVencedor == false && !jogoEncerrado());
+    } while (temVencedor == false && !jogoEncerrado());
 }
 
 
@@ -213,6 +214,8 @@ function jogoEncerrado() {
 function setJogadaInicial() {
     if (last == null) {
         cont = $('inicio').value == 1 ? 1 : 0;
+        jogador = cont == 1 ? 1 : 0;
+        ia = cont == 1 ? 1 : 0;
     } else {
         alert('Jogo já foi iniciado!');
     }
@@ -358,4 +361,46 @@ function limpar() {
 function zeraPontuacao() {
     $('pt-x').innerHTML = 0;
     $('pt-bl').innerHTML = 0;
+}
+
+
+function winning(player) {
+    if(
+        velha[0][0] + velha[0][1] + velha[0][2] == player || 
+        velha[1][0] + velha[1][1] + velha[1][2] == player || 
+        velha[2][0] + velha[2][1] + velha[2][2] == player || 
+        velha[0][0] + velha[1][0] + velha[2][0] == player || 
+        velha[0][1] + velha[1][1] + velha[2][1] == player || 
+        velha[0][2] + velha[1][2] + velha[2][2] == player || 
+        velha[0][2] + velha[1][1] + velha[2][0] == player || 
+        velha[2][2] + velha[1][1] + velha[0][0] == player 
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function disponivel(_velha) {
+    return _velha.filter(el => (el != jogador && el != ia));
+}
+
+function minmax(_velha) { 
+    var _av;
+
+    if (winning(jogador)) {
+        return {
+            score: -10
+        };
+    }
+    else if (winning(ia)) {
+        return {
+            score: 10
+        };
+    }
+    else if (jogoEncerrado()) {
+        return {
+            score: 0
+        };
+    }
 }
