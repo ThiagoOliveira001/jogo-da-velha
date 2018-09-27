@@ -54,57 +54,97 @@ function jogada(event) {
                 desenhaBola(50, 50);
             }
         } else if (cords.y < 400) {
+            if (velha[1][0] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[1][0] = 1;
                 desenhaX(50, 250);
             } else {
+                velha[1][0] = 0;
                 desenhaBola(50, 250);
             }
         } else if (cords.y < 600) {
+            if (velha[2][0] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[2][0] = 1
                 desenhaX(50, 450);
             } else {
+                velha[2][0] = 0;
                 desenhaBola(50, 450);
             }   
         }
     } 
     else if (cords.x < 400) {
         if (cords.y < 200) {
+            if (velha[0][1] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[0][1] = 1;
                 desenhaX(250, 50);
             } else {
+                velha[0][1] = 0;
                 desenhaBola(250, 50);
             }
         } else if (cords.y < 400) {
+            if (velha[1][1] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[1][1] = 1;
                 desenhaX(250, 250);
             } else {
+                velha[1][1] = 0;
                 desenhaBola(250, 250);
             }
         } else if (cords.y < 600) {
+            if (velha[2][1] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[2][1] = 1;
                 desenhaX(250, 450);
             } else {
+                velha[2][1] = 0;
                 desenhaBola(250, 450);
             }
         }
     }
     else if (cords.x < 600) {
         if (cords.y < 200) {
+            if (velha[0][2] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[0][2] = 1;
                 desenhaX(450, 50);
             } else {
+                velha[0][2] = 0;
                 desenhaBola(450, 50);
             }
         } else if (cords.y < 400) {
+            if (velha[1][2] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[1][2] = 1;
                 desenhaX(450, 250);
             } else {
+                velha[1][2] = 0;
                 desenhaBola(450, 250);
             }
         } else if (cords.y < 600) {
+            if (velha[2][2] != null) {
+                return;
+            }
             if ((cont % 2) == 1) {
+                velha[2][2] = 1;
                 desenhaX(450, 450);
             } else {
+                velha[2][2] = 0;
                 desenhaBola(450, 450);
             }
         }
@@ -141,4 +181,31 @@ function desenhaX(x,y) {
     context.strokeStyle = 'red';
 
     context.stroke();
+}
+
+function verificaVitoria() {
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[1][0] + velha[1][1] + velha[1][2]) == 3 || (velha[1][0] + velha[1][1] + velha[1][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
+    if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
+        alert('Victoria');
+    }
 }
