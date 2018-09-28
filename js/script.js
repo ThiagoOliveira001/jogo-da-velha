@@ -20,17 +20,14 @@ var velha = new Array(9).fill(-5);
 */
 //Mapa cordenadas do jogo
 var mapaTabuleiro = [
-    [{ x: 150, y: 150 }, { x: 150, y: 350 }, { x: 150, y: 550 }],
-    [{ x: 250, y: 150 }, { x: 250, y: 350 }, { x: 250, y: 550 }],
-    [{ x: 450, y: 150 }, { x: 450, y: 350 }, { x: 450, y: 550 }]
+    { x: 150, y: 150 }, { x: 150, y: 350 }, { x: 150, y: 550 },
+    { x: 250, y: 150 }, { x: 250, y: 350 }, { x: 250, y: 550 },
+    { x: 450, y: 150 }, { x: 450, y: 350 }, { x: 450, y: 550 }
 ];
 var jogador = 0;
 var ia = 1;
 var temVencedor = false;
 
-window.onload = () => {
-    criaJogo();
-};
 //Desenha as linhas do jogo da velha
 function criaJogo() {
     canvas = $('jogo');
@@ -53,6 +50,10 @@ function criaJogo() {
 
     context.stroke();
 }
+
+
+window.onload = criaJogo;
+
 
 //Pega posição do click mouse do player
 function mousePos(event) {
@@ -266,84 +267,27 @@ function desenhaX(x, y) {
 function verificaVitoria() {
     if (!temVencedor) {
         if ((velha[0] + velha[1] + velha[2]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(0, 100);
-            context.lineTo(600, 100);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(0, 100, 600, 100);
         }
         else if ((velha[3] + velha[4] + velha[5]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(0, 300);
-            context.lineTo(600, 300);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
-        }
+            strike(0, 300, 600, 300);        }
         else if ((velha[6] + velha[7] + velha[8]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(0, 500);
-            context.lineTo(600, 500);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(0, 500, 600, 500);
         }
         else if ((velha[0] + velha[3] + velha[6]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(100, 0);
-            context.lineTo(100, 600);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(100, 0, 100, 600);
         }
         else if ((velha[1] + velha[4] + velha[7]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(300, 0);
-            context.lineTo(300, 600);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(300, 0, 300, 600);
         }
         else if ((velha[2] + velha[5] + velha[8]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(500, 0);
-            context.lineTo(500, 600);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(500, 0, 500, 600);
         }
         else if ((velha[2] + velha[4] + velha[6]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(600, 0);
-            context.lineTo(0, 600);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(600, 0, 0, 600);
         }
         else if ((velha[0] + velha[4] + velha[8]) == 3 * last) {
-            context.beginPath();
-            context.moveTo(0, 0);
-            context.lineTo(600, 600);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'red';
-            context.stroke();
-            temVencedor = true;
+            strike(0,0,600,600);
         }
         if (temVencedor) {
             if (last == 1) {
@@ -355,6 +299,19 @@ function verificaVitoria() {
         }
     }
 }
+//Faz linha em cima de o o o  ou x x x
+function strike(xi, yi, x, y) {
+    context.beginPath();
+    context.moveTo(xi, yi);
+    context.lineTo(x, y);
+
+    context.lineWidth = 4;
+    context.strokeStyle = 'red';
+    context.stroke();
+    temVencedor = true;
+}
+
+
 //Muda o de 1P para 2P ou o contrário.
 function alterPlayerMode(param) {
     single = param;
