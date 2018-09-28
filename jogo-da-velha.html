@@ -18,7 +18,6 @@
         </canvas>
     </div>
     <div class="opcoes form-group">
-        <label for="inicio">Começar com:</label>
         <select name="inicio" class="form-control" id="inicio" onchange="setJogadaInicial()">
             <option value="1">X</option>
             <option value="0" selected>O</option>
@@ -29,6 +28,11 @@
             </i>
         </button>
         <br>
+        <button class="btn btn-success" style="padding: 2px;text-align: center" onclick="zeraPontuacao()">
+            <i class="material-icons">
+                replay
+            </i>
+        </button>
         <button type="button" class="btn btn-primary" onclick="alterPlayerMode(true)">1P</button>
         <button type="button" class="btn btn-primary" onclick="alterPlayerMode(false)">2P</button>
     </div>
@@ -40,13 +44,10 @@
             <p>Jogador O</p>
         </div>
         <div class="pts">
-            <p id="pt-x" style="text-align: center;">0</p>
+            <p id="pt-x" style="text-align: center;color: red;font-family: placar;text-shadow: 2px 2px 5px">0</p>
         </div>
         <div class="pts">
-            <p id="pt-bl" style="text-align: center;">0</p>
-        </div>
-        <div>
-            <button class="btn btn-success" style="margin-top: 5px;" onclick="zeraPontuacao()">Zerar</button>
+            <p id="pt-bl" style="text-align: center;color: red;font-family: placar;text-shadow: 2px 2px 5px">0</p>
         </div>
     </aside>
 </body>
