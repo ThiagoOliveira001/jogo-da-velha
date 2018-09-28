@@ -215,7 +215,7 @@ function computador() {
         if (jogada(null, pc) == undefined) {
             break;
         }
-    } while (temVencedor == false && !jogoEncerrado());
+    } while (temVencedor == false && disponivel(velha).length > 0);
 }
 
 //Verifica se todos os campos foram preenchidos
@@ -289,14 +289,6 @@ function verificaVitoria() {
         else if ((velha[0] + velha[4] + velha[8]) == 3 * last) {
             strike(0,0,600,600);
         }
-        if (temVencedor) {
-            if (last == 1) {
-                $('pt-x').innerHTML = parseInt($('pt-x').textContent) + 1;
-            }
-            else if (last == 0) {
-                $('pt-bl').innerHTML = parseInt($('pt-bl').textContent) + 1;
-            }
-        }
     }
 }
 //Faz linha em cima de o o o  ou x x x
@@ -309,6 +301,12 @@ function strike(xi, yi, x, y) {
     context.strokeStyle = 'red';
     context.stroke();
     temVencedor = true;
+    if (last == 1) {
+        $('pt-x').innerHTML = parseInt($('pt-x').textContent) + 1;
+    }
+    else if (last == 0) {
+        $('pt-bl').innerHTML = parseInt($('pt-bl').textContent) + 1;
+    }
 }
 
 
@@ -368,7 +366,7 @@ function minmax(_velha) {
             score: 10
         };
     }
-    else if (jogoEncerrado()) {
+    else if (disponivel(velha).length == 0) {
         return {
             score: 0
         };
