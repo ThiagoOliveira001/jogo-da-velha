@@ -1,14 +1,19 @@
 var canvas;
+//Contexto canvas
 var context;
 var $ = document.getElementById.bind(document);
 var cont = 0;
+// Ultima jogada
 var last = null;
+//Single player ou não
 var single = true;
+//Tabuleiro das jogadas do jogo
 var velha = [
     [undefined, undefined, undefined],
     [undefined, undefined, undefined],
     [undefined, undefined, undefined]
 ];
+//Mapa cordenadas do jogo
 var mapaTabuleiro = [
     [{ x: 150, y: 150 }, { x: 150, y: 350 }, { x: 150, y: 550 }],
     [{ x: 250, y: 150 }, { x: 250, y: 350 }, { x: 250, y: 550 }],
@@ -21,7 +26,7 @@ var temVencedor = false;
 window.onload = () => {
     criaJogo();
 };
-
+//Desenha as linhas do jogo da velha
 function criaJogo() {
     canvas = $('jogo');
     context = canvas.getContext('2d');
@@ -44,7 +49,7 @@ function criaJogo() {
     context.stroke();
 }
 
-
+//Pega posição do click mouse do player
 function mousePos(event) {
     var rect = canvas.getBoundingClientRect();
     return {
@@ -52,7 +57,7 @@ function mousePos(event) {
         y: event.clientY - rect.top
     };
 }
-
+//Verifica onde foi feita a jogada
 function jogada(event, pc) {
     var cords = event == null ? pc : mousePos(event);
     if (cords.x < 200) {
@@ -186,7 +191,7 @@ function jogada(event, pc) {
         computador();
     }
 }
-
+//Faz jogadas randomicas contra o player
 function computador() {
     do {
         pc = {
@@ -199,7 +204,7 @@ function computador() {
     } while (temVencedor == false && !jogoEncerrado());
 }
 
-
+//Verifica se todos os campos foram preenchidos
 function jogoEncerrado() {
     for (var i = 0; i < velha.length; i++) {
         for (var j = 0; j < velha[i].length; j++) {
@@ -210,7 +215,7 @@ function jogoEncerrado() {
     }
     return true;
 }
-
+//Defini se começa com X ou O
 function setJogadaInicial() {
     if (last == null) {
         cont = $('inicio').value == 1 ? 1 : 0;
@@ -220,7 +225,7 @@ function setJogadaInicial() {
         alert('Jogo já foi iniciado!');
     }
 }
-
+//Desenha o y
 async function desenhaBola(x, y) {
     context.beginPath();
     context.arc(x + 50, y + 50, 50, 0, 2 * Math.PI);
@@ -231,7 +236,7 @@ async function desenhaBola(x, y) {
     last = 0;
     verificaVitoria();
 }
-
+//Desenha o x
 function desenhaX(x, y) {
     context.beginPath();
     context.moveTo(x + 10, y);
@@ -246,7 +251,7 @@ function desenhaX(x, y) {
     last = 1;
     verificaVitoria();
 }
-
+//Verifica se tem um vencedor e desenha linha
 function verificaVitoria() {
     if (!temVencedor) {
         if ((velha[0][0] + velha[0][1] + velha[0][2]) == 3 || (velha[0][0] + velha[0][1] + velha[0][2]) == 0) {
@@ -339,11 +344,11 @@ function verificaVitoria() {
         }
     }
 }
-
+//Muda o de 1P para 2P ou o contrário.
 function alterPlayerMode(param) {
     single = param;
 }
-
+//Limpa o jogo
 function limpar() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     velha = [
@@ -363,7 +368,8 @@ function zeraPontuacao() {
     $('pt-bl').innerHTML = 0;
 }
 
-
+//Codigo destinado a aplica algoritimo de IA ao jogo
+// Em contrução
 function winning(player) {
     if(
         velha[0][0] + velha[0][1] + velha[0][2] == player || 
