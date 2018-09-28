@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Jogo da velha</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/animates.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,24 +17,24 @@
             Navegador não possui suporte ao canvas.
         </canvas>
     </div>
-    <div class="opcoes form-group">
-        <select name="inicio" class="form-control" id="inicio" onchange="setJogadaInicial()">
-            <option value="1">X</option>
+    <div class="opcoes">
+        <select name="inicio" id="inicio" onchange="setJogadaInicial()">
             <option value="0" selected>O</option>
+            <option value="1">X</option>
         </select>
-        <button type="button" class="btn btn-danger">
+        <button style="background-color: rgb(230, 64, 64)" type="button" class="action-button">
             <i class="material-icons" onclick="limpar()">
                 clear
             </i>
         </button>
         <br>
-        <button class="btn btn-success" style="padding: 2px;text-align: center" onclick="zeraPontuacao()">
+        <button style="background-color: rgb(68, 218, 68);" onclick="zeraPontuacao()">
             <i class="material-icons">
                 replay
             </i>
         </button>
-        <button type="button" class="btn btn-primary" onclick="alterPlayerMode(true)">1P</button>
-        <button type="button" class="btn btn-primary" onclick="alterPlayerMode(false)">2P</button>
+        <button id="btn-p1" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(true)">1P</button>
+        <button id="btn-p2" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(false)">2P</button>
     </div>
     <aside class="painel-pontos">
         <div class="jogador-nome">
