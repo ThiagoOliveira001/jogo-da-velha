@@ -367,6 +367,13 @@ function disponivel(estado) {
 // Algoritimo minimax de IA
 // Usado como referencia https://github.com/nicokratky/tictactoe-web/blob/master/script.js
 // Muito obrigado nicokratky
+/*
+    Algoritimo minimax busca minimizar perdar e maximizar ganhos,
+    usado em teworia de jogos, este algoritimo é uma busca competitiva,
+    onde são testados todos os estados possiveis para o jogo a partir
+    do estado atual.
+    Sendo assim retornado o movimento com maior heuristica para ser jogado.
+*/
 function minmax(player, estado) {
     //Pega as posições livres
     var psD = disponivel(estado);
