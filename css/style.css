@@ -1,13 +1,18 @@
+body {
+    background-image: url('../img/fundo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;   
+    
+}
+
 .container {
     display: flex;
     justify-content: center;
 }
 
 .container #jogo {
-    border: solid 1px gray;
-    box-shadow: 10px 10px 5px gray;
     margin-top: 10px;
-    margin-left: 100px;  
+    margin-left: 100px;
 }
 
 .opcoes {
@@ -24,6 +29,7 @@
     margin-left: 10px;
     margin-top: 10px;
     box-shadow: 10px 10px 5px gray;
+    background-color: white;
 }
 
 .opcoes select {
