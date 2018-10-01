@@ -9,6 +9,7 @@ var last = null;
 var single = true;
 //Tabuleiro das jogadas do jogo
 var velha = new Array(9).fill(-5);
+var dificuldade = 'Normal';
 /*
 ====Tabuleiro====
 [
@@ -20,9 +21,10 @@ var velha = new Array(9).fill(-5);
 */
 //Mapa cordenadas do jogo
 var mapaTabuleiro = [
-    { x: 150, y: 150 }, { x: 150, y: 350 }, { x: 150, y: 550 },
-    { x: 250, y: 150 }, { x: 250, y: 350 }, { x: 250, y: 550 },
-    { x: 450, y: 150 }, { x: 450, y: 350 }, { x: 450, y: 550 }
+    { x: 150, y: 150 }, { x: 250, y: 150 }, { x: 450, y: 150 },
+    { x: 150, y: 250 }, { x: 250, y: 250 }, { x: 450, y: 250 },
+    { x: 150, y: 450 }, { x: 250, y: 450 }, { x: 450, y: 450 }
+
 ];
 var jogador = 0;
 var ia = 1;
@@ -78,6 +80,7 @@ function jogada(event, pc) {
 
             } else {
                 velha[0] = 0;
+
                 desenhaBola(50, 50);
 
             }
@@ -204,35 +207,30 @@ function jogada(event, pc) {
     if (pc == null && single == true) {
         computador();
     }
+
 }
 //Faz jogadas randomicas contra o player
 function computador() {
-    do {
-        pc = {
-            x: Math.random() * (600 - 1) + 1,
-            y: Math.random() * (600 - 1) + 1
-        };
-        if (jogada(null, pc) == undefined) {
-            break;
-        }
-    } while (temVencedor == false && !jogoEncerrado());
+    if (dificuldade == 'Normal') {
+        var livre = disponivel(velha);
+        var n = Math.floor(Math.random() * (livre.length - 1) + 1);
+        console.log(livre, n);
+        jogada(null, mapaTabuleiro[livre[n]]);
+    } else {
+        jogada(null, mapaTabuleiro[minmax(ia, velha.slice(0, velha.length)).index]);
+    }
+}
+//Define dificuldade
+function setDificuldade() {
+    dificuldade = $('dificuldade').value;
 }
 
-//Verifica se todos os campos foram preenchidos
-function jogoEncerrado() {
-    for (var i = 0; i < velha.length; i++) {
-        if (velha[i] == -5) {
-            return false;
-        }
-    }
-    return true;
-}
 //Defini se começa com X ou O
 function setJogadaInicial() {
     if (last == null) {
         cont = $('inicio').value == 1 ? 1 : 0;
-        jogador = cont == 1 ? 1 : 0;
-        ia = cont == 1 ? 1 : 0;
+        ia = cont == 1 ? 0 : 1;
+        jogador = cont == 1 ? 0 : 1;
     } else {
         alert('Jogo já foi iniciado!');
     }
@@ -270,7 +268,8 @@ function verificaVitoria() {
             strike(0, 100, 600, 100);
         }
         else if ((velha[3] + velha[4] + velha[5]) == 3 * last) {
-            strike(0, 300, 600, 300);        }
+            strike(0, 300, 600, 300);
+        }
         else if ((velha[6] + velha[7] + velha[8]) == 3 * last) {
             strike(0, 500, 600, 500);
         }
@@ -287,7 +286,7 @@ function verificaVitoria() {
             strike(600, 0, 0, 600);
         }
         else if ((velha[0] + velha[4] + velha[8]) == 3 * last) {
-            strike(0,0,600,600);
+            strike(0, 0, 600, 600);
         }
         if (temVencedor) {
             if (last == 1) {
@@ -333,17 +332,16 @@ function zeraPontuacao() {
 }
 
 //Codigo destinado a aplica algoritimo de IA ao jogo
-// Em contrução
-function winning(player) {
+function winning(player, estado) {
     if (
-        velha[0] + velha[3] + velha[6] == (3 * player) ||
-        velha[1] + velha[4] + velha[7] == (3 * player) ||
-        velha[2] + velha[5] + velha[8] == (3 * player) ||
-        velha[0] + velha[1] + velha[2] == (3 * player) ||
-        velha[3] + velha[4] + velha[5] == (3 * player) ||
-        velha[6] + velha[7] + velha[8] == (3 * player) ||
-        velha[0] + velha[4] + velha[8] == (3 * player) ||
-        velha[2] + velha[4] + velha[6] == (3 * player)
+        estado[0] + estado[1] + estado[2] === (3 * player) ||
+        estado[3] + estado[4] + estado[5] === (3 * player) ||
+        estado[6] + estado[7] + estado[8] === (3 * player) ||
+        estado[0] + estado[3] + estado[6] === (3 * player) ||
+        estado[1] + estado[4] + estado[7] === (3 * player) ||
+        estado[2] + estado[5] + estado[8] === (3 * player) ||
+        estado[2] + estado[4] + estado[6] === (3 * player) ||
+        estado[0] + estado[4] + estado[8] === (3 * player)
     ) {
         return true;
     } else {
@@ -351,26 +349,76 @@ function winning(player) {
     }
 }
 
-function disponivel(_velha) {
-    return _velha.filter(el => (el != jogador && el != ia));
+function disponivel(estado) {
+    var i = [];
+    estado.forEach((el, index) => {
+        if (el != 1 && el != 0) {
+            i.push(index);
+        }
+    });
+    return i;
 }
-
-function minmax(_velha) {
-    var _av;
-
-    if (winning(jogador)) {
+// Algoritimo minimax de IA
+// Usado como referencia https://github.com/nicokratky/tictactoe-web/blob/master/script.js
+// Muito obrigado nicokratky
+function minmax(player, estado) {
+    //Pega as posições livres
+    var psD = disponivel(estado);
+    if (winning(jogador, estado)) {
+        // Se o jogador ganhar retorna -10 de heuristica
         return {
             score: -10
         };
     }
-    else if (winning(ia)) {
+    else if (winning(ia, estado)) {
+        //Se a ia ganhar retorna 10 de heuristica
         return {
             score: 10
         };
     }
-    else if (jogoEncerrado()) {
+    else if (psD.length == 0) {
+        //Empate retorna 0 de heuristica
         return {
             score: 0
         };
     }
+    //Array com os movimentos
+    var movimentos = [];
+    for (var i = 0; i < psD.length; i++) {
+        var movimento = {
+            index: psD[i]
+        }
+        //Testando jogada para ver se é a melhor
+        estado[psD[i]] = player;
+        var aux;
+        if (player == ia) {
+            aux = minmax(jogador, estado);
+        } else {
+            aux = minmax(ia, estado);
+        }
+
+        //Atribui o score retornado
+        movimento.score = aux.score;
+        //Seta a posiçõe para o valor default para testar outro estado do jogo
+        estado[psD[i]] = -5;
+        movimentos.push(movimento);
+    }
+
+    //Melhor score e melhor movimento
+    var ms = player == ia ? -99999 : 99999;
+    var mv;
+    movimentos.forEach((m, index) => {
+        if (player == ia) {
+            if (m.score > ms) {
+                ms = m.score;
+                mv = index;
+            }
+        } else {
+            if (m.score < ms) {
+                ms = m.score;
+                mv = index;
+            }
+        }
+    });
+    return movimentos[mv];
 }

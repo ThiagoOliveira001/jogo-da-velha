@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Jogo da velha</title>
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/animates.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/style.css">
@@ -35,6 +33,13 @@
         </button>
         <button id="btn-p1" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(true)">1P</button>
         <button id="btn-p2" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(false)">2P</button>
+    </div>
+    <div class="nivel">
+        <label for="dificuldade">Dificuldade&nbsp;</label>
+        <select name="dificuldade" id="dificuldade" onchange="setDificuldade()">
+            <option value="Normal">Normal &#128521;</option>
+            <option value="Impossivel">Impossivel &#128546;</option>
+        </select>
     </div>
     <aside class="painel-pontos">
         <div class="jogador-nome">
