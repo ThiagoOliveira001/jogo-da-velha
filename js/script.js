@@ -366,6 +366,7 @@ function disponivel(estado) {
 }
 // Algoritimo minimax de IA
 // Usado como referencia https://github.com/nicokratky/tictactoe-web/blob/master/script.js
+// Usado como referencia https://www.organicadigital.com/seeds/algoritmo-minimax-introducao-a-inteligencia-artificial/
 // Muito obrigado nicokratky
 /*
     Algoritimo minimax busca minimizar perdar e maximizar ganhos,
