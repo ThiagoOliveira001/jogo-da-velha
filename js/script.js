@@ -48,7 +48,7 @@ function criaJogo() {
     context.lineTo(600, 400);
 
     context.lineWidth = 2;
-    context.strokeStyle = 'blue';
+    context.strokeStyle = '#4169E1';
 
     context.stroke();
 }
@@ -214,7 +214,6 @@ function computador() {
     if (dificuldade == 'Normal') {
         var livre = disponivel(velha);
         var n = Math.floor(Math.random() * (livre.length - 1) + 1);
-        console.log(livre, n);
         jogada(null, mapaTabuleiro[livre[n]]);
     } else {
         jogada(null, mapaTabuleiro[minmax(ia, velha.slice(0, velha.length)).index]);
@@ -240,7 +239,7 @@ async function desenhaBola(x, y) {
     context.beginPath();
     context.arc(x + 50, y + 50, 50, 0, 2 * Math.PI);
     context.lineWidth = 2;
-    context.strokeStyle = 'red';
+    context.strokeStyle = 'black';
 
     context.stroke();
     last = 0;
@@ -255,7 +254,7 @@ function desenhaX(x, y) {
     context.lineTo(x + 10, y + 100);
 
     context.lineWidth = 2;
-    context.strokeStyle = 'red';
+    context.strokeStyle = 'black';
 
     context.stroke();
     last = 1;
@@ -305,7 +304,7 @@ function strike(xi, yi, x, y) {
     context.lineTo(x, y);
 
     context.lineWidth = 4;
-    context.strokeStyle = 'red';
+    context.strokeStyle = 'black';
     context.stroke();
     temVencedor = true;
 }
@@ -314,6 +313,13 @@ function strike(xi, yi, x, y) {
 //Muda o de 1P para 2P ou o contrário.
 function alterPlayerMode(param) {
     single = param;
+    if (param) {
+        $("btn-p1").style = "background-color: rgba(46, 46, 250, 0.884)";
+        $("btn-p2").style = "background-color: #00BFFF";
+    } else {
+        $("btn-p2").style = "background-color: rgba(46, 46, 250, 0.884)";
+        $("btn-p1").style = "background-color: #00BFFF"
+    }
 }
 //Limpa o jogo
 function limpar() {

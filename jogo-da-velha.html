@@ -16,30 +16,30 @@
         </canvas>
     </div>
     <div class="opcoes">
-        <select name="inicio" id="inicio" onchange="setJogadaInicial()">
+        <select name="inicio" id="inicio" title="Iniciar com" onchange="setJogadaInicial()">
             <option value="0" selected>O</option>
             <option value="1">X</option>
         </select>
-        <button style="background-color: rgb(230, 64, 64)" type="button" class="action-button">
+        <button style="background-color: rgb(230, 64, 64)" title="Limpa o jogo" type="button" class="action-button">
             <i class="material-icons" onclick="limpar()">
                 clear
             </i>
         </button>
         <br>
-        <button style="background-color: rgb(68, 218, 68);" onclick="zeraPontuacao()">
+        <button style="background-color: rgb(68, 218, 68);" title="Zera o placar" onclick="zeraPontuacao()">
             <i class="material-icons">
                 replay
             </i>
         </button>
-        <button id="btn-p1" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(true)">1P</button>
-        <button id="btn-p2" style="background-color: rgba(46, 46, 250, 0.884)" type="button" onclick="alterPlayerMode(false)">2P</button>
-    </div>
-    <div class="nivel">
-        <label for="dificuldade">Dificuldade&nbsp;</label>
-        <select name="dificuldade" id="dificuldade" onchange="setDificuldade()">
-            <option value="Normal">Normal &#128521;</option>
-            <option value="Impossivel">Impossivel &#128546;</option>
-        </select>
+        <button id="btn-p1" style="background-color: rgba(46, 46, 250, 0.884)" title="Um jogador" type="button" onclick="alterPlayerMode(true)">1P</button>
+        <button id="btn-p2" style="background-color:#00BFFF" title="Dois jogadores" type="button" onclick="alterPlayerMode(false)">2P</button>
+        <div>
+            <label for="dificuldade">Dificuldade&nbsp;</label>
+            <select name="dificuldade" id="dificuldade" style="width: 100px" onchange="setDificuldade()">
+                <option value="Normal">Normal</option>
+                <option value="Impossivel">Impossivel</option>
+            </select>
+        </div>
     </div>
     <aside class="painel-pontos">
         <div class="jogador-nome">
